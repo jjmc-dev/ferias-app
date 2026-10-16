@@ -1155,7 +1155,7 @@ INSERT INTO REALIZA_VENTA VALUES (4, 12, 1000028);
 INSERT INTO REALIZA_VENTA VALUES (5, 14, 1000029);
 INSERT INTO REALIZA_VENTA VALUES (25, 21, 1000040);
 INSERT INTO REALIZA_VENTA VALUES (18, 29, 1000044);
---el commit es necesario
+--el commmit es necesario
 
 --**********************************************************************************************
 --verificacion al finalizar el create y insert
