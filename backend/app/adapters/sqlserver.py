@@ -120,7 +120,8 @@ class SqlServerAdapter(DatabaseAdapter):
         query = text("""
             SELECT
                 o.name AS routine_name,
-                o.type AS routine_type
+                o.type AS routine_type,
+                s.name AS schema_name
             FROM sys.objects AS o
             INNER JOIN sys.schemas AS s
                 ON s.schema_id = o.schema_id
@@ -140,6 +141,7 @@ class SqlServerAdapter(DatabaseAdapter):
             result.append(
                 {
                     "name": routine["routine_name"],
+                    "schema": routine["schema_name"],
                     "type": routine_type,
                     "params": self._get_routine_params(
                         routine["routine_name"], routine_type
@@ -189,7 +191,7 @@ class SqlServerAdapter(DatabaseAdapter):
 
         preparer = self.engine.dialect.identifier_preparer
         quoted_name = preparer.quote(routine_name)
-        schema = preparer.quote("dbo")
+        schema = preparer.quote(routine["schema"])
 
         placeholders = [
             f":param_{index}"
